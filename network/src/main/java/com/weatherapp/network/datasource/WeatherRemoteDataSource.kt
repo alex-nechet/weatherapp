@@ -2,27 +2,29 @@ package com.weatherapp.network.datasource
 
 import com.weatherapp.network.ResponseConverter
 import com.weatherapp.network.WeatherApi
-import com.weatherapp.network.model.ContentType
-import com.weatherapp.network.model.UnitGroup
 import com.weatherapp.network.model.UpcomingWeatherResponse
 
 interface WeatherRemoteDataSource {
+    suspend fun getUpcomingWeather(
+        unitGroup: String,
+        place: String,
+        contentType: String
+    ): Result<UpcomingWeatherResponse?>
 }
 
 class WeatherRemoteDataSourceImpl(
     private val weatherApi: WeatherApi,
     private val responseConverter: ResponseConverter
 ) : WeatherRemoteDataSource {
-
-    suspend fun getUpcomingWeather(
-        unitGroup: UnitGroup = UnitGroup.METRIC,
+    override suspend fun getUpcomingWeather(
+        unitGroup: String,
         place: String,
-        contentType: ContentType = ContentType.JSON
+        contentType: String
     ): Result<UpcomingWeatherResponse?> {
         val response = weatherApi.getUpcomingWeather(
-            unitGroup = unitGroup.toString(),
+            unitGroup = unitGroup,
             place = place,
-            contentType = contentType.toString()
+            contentType = contentType
         )
         return responseConverter.toResult { response }
     }

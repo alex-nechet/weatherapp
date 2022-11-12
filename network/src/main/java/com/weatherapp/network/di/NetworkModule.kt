@@ -22,17 +22,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL =
     "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/"
-private const val API_KEY = "api-key"
+private const val KEY = "key"
 private const val LOGGING_INTERCEPTOR = "logging-interceptor"
 
 private val network = module {
 
-    single(named(API_KEY)) {
+    single(named(KEY)) {
         Interceptor { chain ->
             val original: Request = chain.request()
             val originalHttpUrl: HttpUrl = original.url
             val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("key", "your-actual-api-key")
+                .addQueryParameter(KEY, BuildConfig.API_KEY)
                 .build()
 
             val requestBuilder: Request.Builder = original.newBuilder()
@@ -47,7 +47,7 @@ private val network = module {
         val httpLoggingInterceptor =
             HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return@single httpLoggingInterceptor
+        httpLoggingInterceptor
     }
 
     single {
@@ -55,13 +55,13 @@ private val network = module {
         if (BuildConfig.DEBUG) {
             clientBuilder.addInterceptor(get<Interceptor>(named(LOGGING_INTERCEPTOR)))
         }
-        clientBuilder.addInterceptor(get<Interceptor>(named(API_KEY)))
+        clientBuilder.addInterceptor(get<Interceptor>(named(KEY)))
         clientBuilder.build()
     }
 
     single {
         Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
+            .addLast(KotlinJsonAdapterFactory())
             .build()
     }
 
@@ -71,7 +71,7 @@ private val network = module {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(get())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(get()))
             .build() // Doesn't require the adapter
     }
 }

@@ -9,8 +9,8 @@ import retrofit2.http.Query
 interface WeatherApi {
     @GET("timeline/{place}")
     suspend fun getUpcomingWeather(
-        @Query("unitGroup") unitGroup: String,
         @Path("place") place: String,
+        @Query("unitGroup") unitGroup: String,
         @Query("contentType") contentType: String
-    ) : Response<UpcomingWeatherResponse>
+    ): Response<UpcomingWeatherResponse>
 }
