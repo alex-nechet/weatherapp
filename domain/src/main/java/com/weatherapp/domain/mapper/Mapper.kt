@@ -2,6 +2,7 @@ package com.weatherapp.domain.mapper
 
 import com.weatherapp.domain.model.TodayWeather
 import com.weatherapp.domain.model.UpcomingWeather
+import com.weatherapp.domain.model.WeatherPicture
 
 fun UpcomingWeather.toTodayWeather() = TodayWeather(
     latitude = latitude.toString(),
@@ -24,6 +25,8 @@ fun UpcomingWeather.toTodayWeather() = TodayWeather(
     sunset = currentConditions?.sunset.orEmpty(),
     conditions = currentConditions?.conditions.orEmpty(),
     description = currentConditions?.description.orEmpty(),
-    icon = currentConditions?.icon.orEmpty(),
+    icon = WeatherPicture.values().find {
+        currentConditions?.icon?.contains(it.toString()) ?: false
+    } ?: WeatherPicture.NONE ,
     hours = currentConditions?.hours
 )

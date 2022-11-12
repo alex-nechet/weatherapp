@@ -1,9 +1,7 @@
 package com.weatherapp.domain.model
 
-import java.util.Locale
-
-enum class UnitGroup {
-    METRIC, US, UK;
+enum class WeatherPicture {
+    CLEAR, CLOUDY, SNOWY, SNOW, RAINY, RAIN, NONE;
 
     override fun toString() = name.lowercase()
 }

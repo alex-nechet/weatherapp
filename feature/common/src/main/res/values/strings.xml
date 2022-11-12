@@ -4,4 +4,8 @@
     <string name="retry">Retry</string>
     <string name="error_server">Oops, something went wrong, please retry</string>
     <string name="error_bad_location_request">The location you entered is not valid</string>
+    <string name="feels_like">Feels like: %s</string>
+    <string name="max">Max: %s</string>
+    <string name="min">Min: %s</string>
+
 </resources>

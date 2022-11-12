@@ -36,5 +36,5 @@ dependencies {
     api 'androidx.navigation:navigation-ui-ktx:2.5.3'
     api "androidx.fragment:fragment-ktx:1.5.4"
     api "io.insert-koin:koin-android:3.3.0"
-
+    api "io.coil-kt:coil:2.2.2"
 }

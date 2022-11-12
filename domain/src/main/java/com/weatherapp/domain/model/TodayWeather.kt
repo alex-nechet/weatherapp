@@ -21,6 +21,6 @@ data class TodayWeather(
     val sunset: String,
     val conditions: String,
     val description: String,
-    val icon: String,
+    val icon: WeatherPicture,
     val hours: List<Hours>? = null
 )
