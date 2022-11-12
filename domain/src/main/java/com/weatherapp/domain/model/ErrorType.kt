@@ -7,6 +7,6 @@ sealed interface ErrorType {
     
     sealed interface Errors : ErrorType{
         data class ServerError(val serverError: Throwable) : Errors
-        object BadWeatherRequest : Errors
+        object BadLocationRequest : Errors
     }
 }

@@ -37,15 +37,14 @@ android {
     kotlinOptions {
         jvmTarget = buildConfig.javaVersion.toString()
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
     implementation project(':network')
     implementation project(':data')
     implementation project(':domain')
+    implementation project(':feature:common')
+    implementation project(':feature:details')
 
     implementation AndroidX.core.ktx
     implementation AndroidX.appCompat

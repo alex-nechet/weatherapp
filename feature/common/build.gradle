@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.weatherapp.feature.details'
+    namespace 'com.example.common'
     compileSdk buildConfig.compileSdk
 
     defaultConfig {
@@ -28,12 +28,12 @@ android {
     kotlinOptions {
         jvmTarget = buildConfig.javaVersion.toString()
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
-    implementation project(':domain')
-    implementation project(':feature:common')
+    api project(':domain')
+    api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    api "androidx.fragment:fragment-ktx:1.5.4"
+
 }

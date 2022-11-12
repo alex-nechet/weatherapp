@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="error_network">Connection issue, please retry when connection will be available</string>
+    <string name="retry">Retry</string>
+    <string name="error_server">Oops, something went wrong, please retry</string>
+    <string name="error_bad_location_request">The location you entered is not valid</string>
+</resources>

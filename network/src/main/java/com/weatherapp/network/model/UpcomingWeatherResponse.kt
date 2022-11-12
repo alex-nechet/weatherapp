@@ -9,25 +9,25 @@ data class UpcomingWeatherResponse(
     val timezone: String? = null,
     val tzoffset: Int? = null,
     val description: String? = null,
-    val days: List<Day>? = null,
-    val currentConditions: Day? = null
+    val days: List<DayResponse>? = null,
+    val currentConditions: DayResponse? = null
 )
 
-data class Day(
+data class DayResponse(
     val datetime: String? = null,
     val datetimeEpoch: Long? = null,
     val tempmax: Double? = null,
     val tempmin: Double? = null,
     val temp: Double? = null,
-    val feelslikemax: Int? = null,
-    val feelslikemin: Int? = null,
+    val feelslikemax: Double? = null,
+    val feelslikemin: Double? = null,
     val feelslike: Double? = null,
     val dew: Double? = null,
     val humidity: Double? = null,
     val precip: Int? = null,
     val precipprob: Int? = null,
     val precipcover: Int? = null,
-    val preciptype: Any? = null,
+    val preciptype: String? = null,
     val snow: Long? = null,
     val snowdepth: Int? = null,
     val windgust: Int? = null,
@@ -46,7 +46,7 @@ data class Day(
     val description: String? = null,
     val icon: String? = null,
     val source: String? = null,
-    val hours: List<Day>? = null,
+    val hours: List<DayResponse>? = null,
     val precipsum: Long? = null,
     val precipsumnormal: Long? = null,
     val snowsum: Long? = null,
