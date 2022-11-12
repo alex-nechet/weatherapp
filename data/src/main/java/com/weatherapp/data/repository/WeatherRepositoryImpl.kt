@@ -8,7 +8,7 @@ import com.weatherapp.domain.model.ErrorType
 import com.weatherapp.domain.model.Place
 import com.weatherapp.domain.model.UnitGroup
 import com.weatherapp.domain.model.UpcomingWeather
-import com.weatherapp.domain.model.Wrapper
+import com.weatherapp.domain.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +19,11 @@ import kotlin.coroutines.CoroutineContext
 
 
 class WeatherRepositoryImpl(
-    private val remote: WeatherRemoteDataSource,
-    private val coroutineContext: CoroutineContext
+    private val remote: WeatherRemoteDataSource, private val coroutineContext: CoroutineContext
 ) : WeatherRepository {
 
-    private val cachedData = MutableStateFlow<Wrapper<UpcomingWeather>?>(null)
+    private val cachedData = MutableStateFlow<State<UpcomingWeather>?>(null)
+
 
     @ExperimentalCoroutinesApi
     override fun getUpcomingWeather(
@@ -42,7 +42,8 @@ class WeatherRepositoryImpl(
         unitGroup: UnitGroup,
         place: Place,
         contentType: ContentType
-    ): Flow<Wrapper<UpcomingWeather>> = flow<Wrapper<UpcomingWeather>> {
+    ): Flow<State<UpcomingWeather>> = flow<State<UpcomingWeather>> {
+        emit(State.Loading())
         val placeRequest = when (place) {
             is Place.Address -> place.address
             is Place.Coordinates -> "${place.latitude},${place.longitude}"
@@ -55,15 +56,15 @@ class WeatherRepositoryImpl(
             )
             result.onSuccess { data ->
                 when (data) {
-                    null -> emit(Wrapper.Error(ErrorType.Errors.BadLocationRequest))
-                    else -> emit(Wrapper.Success(data.toUpcomingWeather()))
+                    null -> emit(State.Error(ErrorType.Errors.BadLocationRequest))
+                    else -> emit(State.Success(data.toUpcomingWeather()))
                 }
             }.onFailure { exception ->
-                emit(Wrapper.Error(ErrorType.Errors.ServerError(exception)))
+                emit(State.Error(ErrorType.Errors.ServerError(exception)))
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            emit(Wrapper.Error(ErrorType.CommonErrors.NETWORK_ERROR))
+            emit(State.Error(ErrorType.CommonErrors.NETWORK_ERROR))
         }
     }.flowOn(coroutineContext)
 }

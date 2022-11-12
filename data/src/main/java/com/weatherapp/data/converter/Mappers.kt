@@ -20,31 +20,6 @@ fun UpcomingWeatherResponse.toUpcomingWeather() = UpcomingWeather(
     currentConditions = currentConditions?.toDay()
 )
 
-fun UpcomingWeather.toTodayWeather() = TodayWeather(
-    latitude = latitude,
-    longitude = longitude,
-    resolvedAddress = resolvedAddress,
-    address = address,
-    timezone= timezone,
-    datetime = currentConditions?.datetime.orEmpty(),
-    tempmax = currentConditions?.tempmax,
-    tempmin = currentConditions?.tempmin,
-    temp = currentConditions?.temp,
-    feelslike = currentConditions?.feelslike,
-    humidity = currentConditions?.humidity,
-    precip = currentConditions?.precip,
-    preciptype = currentConditions?.preciptype,
-    windspeed = currentConditions?.windspeed,
-    pressure = currentConditions?.pressure,
-    uvindex = currentConditions?.uvindex,
-    sunrise = currentConditions?.sunrise.orEmpty(),
-    sunset = currentConditions?.sunset.orEmpty(),
-    conditions = currentConditions?.conditions.orEmpty(),
-    description = currentConditions?.description.orEmpty(),
-    icon = currentConditions?.icon.orEmpty(),
-    hours = currentConditions?.hours
-)
-
 fun DayResponse.toDay() = Day(
     datetime = datetime.orEmpty(),
     tempmax = tempmax,
@@ -55,8 +30,8 @@ fun DayResponse.toDay() = Day(
     feelslike = feelslike,
     humidity = humidity,
     precip = precip,
-    preciptype = PrecipationType.values().find{
-        it.name.lowercase() == preciptype?.lowercase()
+    preciptype = preciptype?.mapNotNull {
+        PrecipationType.values().find { enum -> enum.toString() == it.lowercase() }
     },
     windspeed = windspeed,
     pressure = pressure,
@@ -68,7 +43,7 @@ fun DayResponse.toDay() = Day(
     description = description.orEmpty(),
     icon = icon.orEmpty(),
     source = source.orEmpty(),
-    hours =  hours?.map { it.toHours() }
+    hours = hours?.map { it.toHours() }
 )
 
 fun DayResponse.toHours() = Hours(
@@ -81,8 +56,8 @@ fun DayResponse.toHours() = Hours(
     feelslike = feelslike,
     humidity = humidity,
     precip = precip,
-    preciptype = PrecipationType.values().find{
-        it.name.lowercase() == preciptype?.lowercase()
+    preciptype = preciptype?.mapNotNull {
+        PrecipationType.values().find { enum -> enum.toString() == it.lowercase() }
     },
     windspeed = windspeed,
     pressure = pressure,
