@@ -32,4 +32,11 @@ android {
 
 dependencies {
     api KotlinX.coroutines.android
+    testApi "org.jetbrains.kotlinx:kotlinx-coroutines-test:_"
+    testApi 'junit:junit:4.12'
+    testApi "androidx.test:core:_"
+    testApi "org.mockito:mockito-core:_"
+    testApi "org.mockito.kotlin:mockito-kotlin:_"
+    testApi "io.mockk:mockk:_"
+    testApi 'app.cash.turbine:turbine:0.12.1'
 }
