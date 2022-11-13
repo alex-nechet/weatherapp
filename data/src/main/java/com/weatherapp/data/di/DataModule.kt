@@ -3,6 +3,7 @@ package com.weatherapp.data.di
 import com.weatherapp.data.repository.WeatherRepositoryImpl
 import com.weatherapp.domain.data.WeatherRepository
 import com.weatherapp.domain.usecase.CurrentWeatherUseCase
+import com.weatherapp.domain.usecase.CurrentWeatherUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -16,5 +17,5 @@ val dataModule = module {
 }
 
 val useCaseModule = module {
-    single { CurrentWeatherUseCase(get()) }
+    single<CurrentWeatherUseCase> { CurrentWeatherUseCaseImpl(get()) }
 }
