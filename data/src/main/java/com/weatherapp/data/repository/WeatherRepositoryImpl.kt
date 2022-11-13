@@ -5,6 +5,7 @@ import com.weatherapp.domain.data.WeatherRepository
 import com.weatherapp.network.datasource.WeatherRemoteDataSource
 import com.weatherapp.domain.model.ContentType
 import com.weatherapp.domain.model.ErrorType
+import com.weatherapp.domain.model.GlobalErrors
 import com.weatherapp.domain.model.Place
 import com.weatherapp.domain.model.UnitGroup
 import com.weatherapp.domain.model.UpcomingWeather
@@ -56,15 +57,15 @@ class WeatherRepositoryImpl(
             )
             result.onSuccess { data ->
                 when (data) {
-                    null -> emit(State.Error(ErrorType.Errors.BadLocationRequest))
+                    null -> emit(State.Error(GlobalErrors.BadLocationRequest))
                     else -> emit(State.Success(data.toUpcomingWeather()))
                 }
             }.onFailure { exception ->
-                emit(State.Error(ErrorType.Errors.ServerError(exception)))
+                emit(State.Error(GlobalErrors.ServerError(exception)))
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            emit(State.Error(ErrorType.CommonErrors.NETWORK_ERROR))
+            emit(State.Error(GlobalErrors.NetworkError))
         }
     }.flowOn(coroutineContext)
 }

@@ -13,7 +13,7 @@ data class TodayWeather(
     val feelslike: String,
     val humidity: String,
     val precip: String,
-    val preciptype: List<PrecipationType>? = null,
+    val preciptype: List<PrecipationType>?,
     val windspeed: String,
     val pressure: String,
     val uvindex: String,
@@ -22,5 +22,5 @@ data class TodayWeather(
     val conditions: String,
     val description: String,
     val icon: WeatherPicture,
-    val hours: List<Hours>? = null
+    val days: List<Day>?
 )

@@ -28,5 +28,5 @@ fun UpcomingWeather.toTodayWeather() = TodayWeather(
     icon = WeatherPicture.values().find {
         currentConditions?.icon?.contains(it.toString()) ?: false
     } ?: WeatherPicture.NONE ,
-    hours = currentConditions?.hours
+    days = days
 )

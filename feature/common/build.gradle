@@ -28,13 +28,17 @@ android {
     kotlinOptions {
         jvmTarget = buildConfig.javaVersion.toString()
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     api project(':domain')
-    api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    api 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    api "androidx.fragment:fragment-ktx:1.5.4"
-    api "io.insert-koin:koin-android:3.3.0"
-    api "io.coil-kt:coil:2.2.2"
+    api libs.navigation.fragment.ktx
+    api libs.navigation.ui.ktx
+    api libs.fragment.ktx
+    api libs.koin.android
+    api libs.coil
+    api libs.permissionx
 }

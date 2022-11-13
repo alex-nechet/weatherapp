@@ -2,6 +2,9 @@ package com.weatherapp.feature.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.weatherapp.domain.model.ErrorType
+import com.weatherapp.domain.model.GlobalErrors
+import com.weatherapp.domain.model.Place
 import com.weatherapp.domain.model.State
 import com.weatherapp.domain.model.TodayWeather
 import com.weatherapp.domain.model.UpcomingWeather
@@ -18,11 +21,13 @@ class DetailsViewModel(private val useCase: CurrentWeatherUseCase) : ViewModel()
     private val mState = MutableStateFlow<State<TodayWeather>>(State.Loading())
     val state = mState.asStateFlow()
 
-    fun getCurrentWeather() {
+    fun getCurrentWeather(place: Place) {
         viewModelScope.launch {
-            useCase.currentWeather.collectLatest {
-                    mState.value = it
-                }
+            useCase.currentWeatherFor(place).collectLatest { mState.value = it }
         }
+    }
+
+    fun showLocationPermissionError() {
+        mState.value = State.Error(GlobalErrors.LocationPermissionError)
     }
 }

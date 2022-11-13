@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.retry
 
 private const val RETRIES = 2L
 
-class CurrentWeatherUseCase(repository: WeatherRepository) {
-    val currentWeather = repository.getUpcomingWeather(
+class CurrentWeatherUseCase(private val repository: WeatherRepository) {
+    fun currentWeatherFor(place: Place) = repository.getUpcomingWeather(
         forceUpdate = true,
-        place = Place.Address("berlin")
+        place = place
     )
         .retry(RETRIES)
         .map {

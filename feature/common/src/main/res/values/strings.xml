@@ -4,8 +4,12 @@
     <string name="retry">Retry</string>
     <string name="error_server">Oops, something went wrong, please retry</string>
     <string name="error_bad_location_request">The location you entered is not valid</string>
+    <string name="error_permissions_missed">Permissions missed to define your location: </string>
     <string name="feels_like">Feels like: %s</string>
     <string name="max">Max: %s</string>
     <string name="min">Min: %s</string>
-
+    <string name="error_needs_permission">This app needs location permission to show current weather for you</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="forecast">Forecast</string>
 </resources>

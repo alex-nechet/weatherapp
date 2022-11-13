@@ -5,6 +5,7 @@ Dependencies overview:
 - Pictures loading: Coil
 - DI: Koin
 - Navigation, ViewModel: Jetpack
+- Permissions: PermissionX
 
 Architecture:MVVM
 
