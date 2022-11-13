@@ -21,6 +21,7 @@ import com.weatherapp.domain.model.GlobalErrors
 import com.weatherapp.domain.model.Place
 import com.weatherapp.domain.model.State
 import com.weatherapp.domain.model.TodayWeather
+import com.weatherapp.domain.model.UnitGroup
 import com.weatherapp.feature.details.databinding.FragmentDetailsBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -130,7 +131,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun FragmentDetailsBinding.setFooterData(state: State.Success<TodayWeather>) {
-        val adapter = DailyAdapter()
+        val adapter = DailyAdapter(viewModel.unitGroup.suffix)
         dailyList.layoutManager = LinearLayoutManager(requireContext())
         dailyList.adapter = adapter
         adapter.submitList(state.data.days)
@@ -139,12 +140,20 @@ class DetailsFragment : Fragment() {
     private fun FragmentDetailsBinding.setHeaderData(state: State.Success<TodayWeather>) {
         location.text = state.data.resolvedAddress
         status.text = state.data.conditions
-        feelsLike.text = getString(R.string.feels_like, state.data.feelslike)
+        feelsLike.text = getString(
+            R.string.feels_like,
+            state.data.feelslike,
+            viewModel.unitGroup.suffix
+        )
         min.isVisible = state.data.tempmax.nonNull()
         max.isVisible = state.data.tempmax.nonNull()
-        max.text = getString(R.string.max, state.data.tempmax)
-        min.text = getString(R.string.min, state.data.tempmin)
-        currentTemperature.text = state.data.temp
+        max.text = getString(R.string.max, state.data.tempmax, viewModel.unitGroup.suffix)
+        min.text = getString(R.string.min, state.data.tempmin, viewModel.unitGroup.suffix)
+        currentTemperature.text = getString(
+            R.string.temp_mask,
+            state.data.temp,
+            viewModel.unitGroup.suffix
+        )
         picture.loadImage(state.data.icon.extractResource())
     }
 
@@ -166,6 +175,7 @@ class DetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.errorActionButton.setOnClickListener(null)
         binding.picture.dispose()
         _binding = null
     }

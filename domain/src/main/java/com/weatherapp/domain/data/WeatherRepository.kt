@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface WeatherRepository {
     fun getUpcomingWeather(
         forceUpdate: Boolean = false,
-        unitGroup: UnitGroup = UnitGroup.METRIC,
+        unitGroup: UnitGroup,
         place: Place,
         contentType: ContentType = ContentType.JSON
     ): Flow<State<UpcomingWeather>>

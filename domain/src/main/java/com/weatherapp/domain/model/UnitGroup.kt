@@ -1,9 +1,7 @@
 package com.weatherapp.domain.model
 
-import java.util.Locale
-
-enum class UnitGroup {
-    METRIC, US, UK;
+enum class UnitGroup(val suffix: String) {
+    METRIC("C"), US("F"), UK("C");
 
     override fun toString() = name.lowercase()
 }

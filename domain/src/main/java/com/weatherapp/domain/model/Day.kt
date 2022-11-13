@@ -2,12 +2,12 @@ package com.weatherapp.domain.model
 
 data class Day(
     val datetime: String,
-    val tempmax: Double?,
-    val tempmin: Double?,
-    val temp: Double?,
-    val feelslikemax: Double?,
-    val feelslikemin: Double?,
-    val feelslike: Double?,
+    val tempmax: Int?,
+    val tempmin: Int?,
+    val temp: Int?,
+    val feelslikemax: Int?,
+    val feelslikemin: Int?,
+    val feelslike: Int?,
     val humidity: Double?,
     val precip: Double?,
     val preciptype: List<PrecipationType>?,

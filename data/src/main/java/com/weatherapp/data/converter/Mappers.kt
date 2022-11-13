@@ -7,6 +7,8 @@ import com.weatherapp.domain.model.TodayWeather
 import com.weatherapp.domain.model.UpcomingWeather
 import com.weatherapp.network.model.DayResponse
 import com.weatherapp.network.model.UpcomingWeatherResponse
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 
 fun UpcomingWeatherResponse.toUpcomingWeather() = UpcomingWeather(
@@ -22,12 +24,12 @@ fun UpcomingWeatherResponse.toUpcomingWeather() = UpcomingWeather(
 
 fun DayResponse.toDay() = Day(
     datetime = datetime.orEmpty(),
-    tempmax = tempmax,
-    tempmin = tempmin,
-    temp = temp,
-    feelslikemax = feelslikemax,
-    feelslikemin = feelslikemin,
-    feelslike = feelslike,
+    tempmax = tempmax?.roundToInt(),
+    tempmin = tempmin?.roundToInt(),
+    temp = temp?.roundToInt(),
+    feelslikemax = feelslikemax?.roundToInt(),
+    feelslikemin = feelslikemin?.roundToInt(),
+    feelslike = feelslike?.roundToInt(),
     humidity = humidity,
     precip = precip,
     preciptype = preciptype?.mapNotNull {
