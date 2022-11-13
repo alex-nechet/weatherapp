@@ -20,6 +20,10 @@ Remarks:
 - App handles units system according to your devie locale (US, UK, Other)
 - Location is required to work, if last location will be null, app wont work
 - Unit or UI tests are not added as it was not asked about that in the requirements
+- No proguard rules or other usual manipulation are done for the release app version to save on development time 
 - API source: https://www.visualcrossing.com/weather-api
+
+Further development:
+- Display upcoming days weather details
 
  
