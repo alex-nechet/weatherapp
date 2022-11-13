@@ -23,6 +23,6 @@ Remarks:
 - API source: https://www.visualcrossing.com/weather-api
 
 Further development:
-- Displpay upcoming days weather details
+- Display upcoming days weather details
 
  
