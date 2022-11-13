@@ -22,9 +22,7 @@ import kotlin.coroutines.CoroutineContext
 class WeatherRepositoryImpl(
     private val remote: WeatherRemoteDataSource, private val coroutineContext: CoroutineContext
 ) : WeatherRepository {
-
     private val cachedData = MutableStateFlow<State<UpcomingWeather>?>(null)
-
 
     @ExperimentalCoroutinesApi
     override fun getUpcomingWeather(

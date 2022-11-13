@@ -34,4 +34,12 @@ dependencies {
     implementation project(':network')
     implementation project(':domain')
     implementation Koin.android
+
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.junit.junit
+    testImplementation libs.androidx.test.core
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.mockk
+    testImplementation libs.turbine
 }
