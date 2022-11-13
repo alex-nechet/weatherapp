@@ -22,4 +22,7 @@ Remarks:
 - Unit or UI tests are not added as it was not asked about that in the requirements
 - API source: https://www.visualcrossing.com/weather-api
 
+Further development:
+- Displpay upcoming days weather details
+
  
